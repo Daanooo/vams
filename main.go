@@ -1,7 +1,12 @@
 package main
 
+import "fmt"
+
 func main() {
-	a := NewApp()
+	a, err := NewApp()
+	if err != nil {
+		panic(fmt.Sprintf("Could not start app: %s", err.Error()))
+	}
 
 	a.Run()
 }
