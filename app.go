@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/Daanooo/vams/internal/database"
 	"github.com/Daanooo/vams/internal/router"
 	"github.com/joho/godotenv"
 )
@@ -10,12 +11,17 @@ type App struct {
 }
 
 func NewApp() (*App, error) {
-	router := router.NewRouter()
-
 	err := godotenv.Load()
 	if err != nil {
 		return nil, err
 	}
+
+	db, err := database.NewMysql()
+	if err != nil {
+		return nil, err
+	}
+
+	router := router.NewRouter(db)
 
 	return &App{
 		router: router,

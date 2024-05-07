@@ -1,12 +1,15 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+)
 
 type Router struct {
 	gin *gin.Engine
 }
 
-func NewRouter() *Router {
+func NewRouter(db *gorm.DB) *Router {
 	g := gin.Default()
 
 	g.GET("/", func(ctx *gin.Context) {
